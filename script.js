@@ -76,6 +76,16 @@ function showQuestion() {
     document.getElementById('answer_4').innerHTML = question['answer_4'];
 }
 
-function answer(selection) {
-    
+function answer(selection) { // onclick auf answer() und Übergabe des Parameters, welche Card geclickt wurde
+    let question = questions[currentQuestion]; //ziehe mir den Wert von des JSON questions an der Stelle currentQuestion (globale Variable)
+    console.log('selected answer is ', selection);
+    let selectedQuestionNumber = selection.slice(-1); // ich greife auf den Parameter selection zu und ziehe mir den letzten Wert (hier eine Zahl) heraus
+    console.log('selected question number is ', selectedQuestionNumber);
+    console.log('correct answer is ', question['right_answer']);
+
+    if(selectedQuestionNumber == question['right_answer']) { // ist slice(-1) Wert gleich questions an der Stelle currentQuestion aus dem Objekt?
+        console.log('Richtige Antwort!!!');
+    } else { // wenn nicht, dann falsche Antwort
+        console.log('Falsche Antwort!!!!');
+    }
 }
