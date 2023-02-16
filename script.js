@@ -78,16 +78,14 @@ function showQuestion() {
 
 function answer(selection) { // onclick auf answer() und Übergabe des Parameters, welche Card geclickt wurde
     let question = questions[currentQuestion]; //ziehe mir den Wert von des JSON questions an der Stelle currentQuestion (globale Variable)
-    console.log('selected answer is ', selection);
     let selectedQuestionNumber = selection.slice(-1); // ich greife auf den Parameter selection zu und ziehe mir den letzten Wert (hier eine Zahl) heraus
-    console.log('selected question number is ', selectedQuestionNumber);
-    console.log('correct answer is ', question['right_answer']);
+    let idOfRightAnswer = `answer_${question['right_answer']}`; // Variable, die die richtige Antwort an else weitergibt 
 
-    if(selectedQuestionNumber == question['right_answer']) { // ist slice(-1) Wert gleich questions an der Stelle currentQuestion aus dem Objekt?
-        console.log('Richtige Antwort!!!');
+    if (selectedQuestionNumber == question['right_answer']) { // ist slice(-1) Wert gleich questions an der Stelle currentQuestion aus dem Objekt?
         document.getElementById(selection).parentNode.classList.add('bg-success'); // fügt Klasse zum übergeordneten Div-Container zu, um Farbe zu ändern
     } else { // wenn nicht, dann falsche Antwort
-        console.log('Falsche Antwort!!!!');
         document.getElementById(selection).parentNode.classList.add('bg-danger'); // fügt Klasse zum übergeordneten Div-Container zu, um Farbe zu ändern
+        document.getElementById(idOfRightAnswer).parentNode.classList.add('bg-success'); // bei falscher Antwort wird die richtige Antwort zusätzlich angezeigt
     }
+    document.getElementById('next-button').disabled = false;
 }
