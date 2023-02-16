@@ -89,3 +89,8 @@ function answer(selection) { // onclick auf answer() und Übergabe des Parameter
     }
     document.getElementById('next-button').disabled = false;
 }
+
+function nextQuestion() {
+    currentQuestion++; // globale Variable sich z.B. von 0 auf 1
+    showQuestion();
+}
