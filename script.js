@@ -69,6 +69,7 @@ function init() {
 
 function showQuestion() {
     let question = questions[currentQuestion];
+    document.getElementById('question-number').innerHTML = currentQuestion + 1;
     document.getElementById('questiontext').innerHTML = question['question'];
     document.getElementById('answer_1').innerHTML = question['answer_1'];
     document.getElementById('answer_2').innerHTML = question['answer_2'];
@@ -87,10 +88,24 @@ function answer(selection) { // onclick auf answer() und Übergabe des Parameter
         document.getElementById(selection).parentNode.classList.add('bg-danger'); // fügt Klasse zum übergeordneten Div-Container zu, um Farbe zu ändern
         document.getElementById(idOfRightAnswer).parentNode.classList.add('bg-success'); // bei falscher Antwort wird die richtige Antwort zusätzlich angezeigt
     }
-    document.getElementById('next-button').disabled = false;
+    document.getElementById('next-button').disabled = false; // aktivieren des im HTML mit disabled deaktivierten Buttons
 }
 
 function nextQuestion() {
-    currentQuestion++; // globale Variable sich z.B. von 0 auf 1
+    currentQuestion++; // globale Variable erhöht sich z.B. von 0 auf 1
+    document.getElementById('next-button').disabled = true; // Weiterbutton-Funktion wird wieder deaktiviert (disabled)
+    
+    resetAnswerButtons();
     showQuestion();
+}
+
+function resetAnswerButtons() {
+    document.getElementById('answer_1').parentNode.classList.remove('bg-danger'); // zurücksetzen der hinzugefügten CSS-Klassen um Cardfarbe zu ändern
+    document.getElementById('answer_1').parentNode.classList.remove('bg-success');
+    document.getElementById('answer_2').parentNode.classList.remove('bg-danger');
+    document.getElementById('answer_2').parentNode.classList.remove('bg-success');
+    document.getElementById('answer_3').parentNode.classList.remove('bg-danger');
+    document.getElementById('answer_3').parentNode.classList.remove('bg-success');
+    document.getElementById('answer_4').parentNode.classList.remove('bg-danger');
+    document.getElementById('answer_4').parentNode.classList.remove('bg-success');
 }
