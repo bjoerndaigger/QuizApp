@@ -68,13 +68,18 @@ function init() {
 
 
 function showQuestion() {
-    let question = questions[currentQuestion];
-    document.getElementById('question-number').innerHTML = currentQuestion + 1; // Anzeige der aktuellen Indexstelle des Array
-    document.getElementById('questiontext').innerHTML = question['question'];
-    document.getElementById('answer_1').innerHTML = question['answer_1'];
-    document.getElementById('answer_2').innerHTML = question['answer_2'];
-    document.getElementById('answer_3').innerHTML = question['answer_3'];
-    document.getElementById('answer_4').innerHTML = question['answer_4'];
+    if (currentQuestion >= questions.length) { // wenn currentQuestion gleich oder größer questions.length ist (hier 7) Ausführung stoppen
+        document.getElementById('endScreen').style = ''; // leert das Inline-CSS, so dass display: none nicht mehr aktiv ist
+        document.getElementById('questionBody').style = 'display: none'; //entfernt den Container mit den Fragen
+    } else {
+        let question = questions[currentQuestion]; // zieht Wert aus JSON und startet an der Stelle 0
+        document.getElementById('question-number').innerHTML = currentQuestion + 1; // Anzeige der aktuellen Indexstelle des Array
+        document.getElementById('questiontext').innerHTML = question['question'];
+        document.getElementById('answer_1').innerHTML = question['answer_1'];
+        document.getElementById('answer_2').innerHTML = question['answer_2'];
+        document.getElementById('answer_3').innerHTML = question['answer_3'];
+        document.getElementById('answer_4').innerHTML = question['answer_4'];
+    }
 }
 
 function answer(selection) { // onclick auf answer() und Übergabe des Parameters, welche Card geclickt wurde
@@ -94,7 +99,7 @@ function answer(selection) { // onclick auf answer() und Übergabe des Parameter
 function nextQuestion() {
     currentQuestion++; // globale Variable erhöht sich z.B. von 0 auf 1
     document.getElementById('next-button').disabled = true; // Weiterbutton-Funktion wird wieder deaktiviert (disabled)
-    
+
     resetAnswerButtons();
     showQuestion();
 }

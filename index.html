@@ -27,7 +27,15 @@
   <div class="container">
     <div class="card quiz-card">
       <img src="./img/logo.png" class="card-img-top" alt="logo">
-      <div class="card-body">
+
+      <div class="card-body end-screen" id="endScreen" style="display: none">
+        <div><img src="./img/brain-result.png"> </div>
+        <div class="text-uppercase font-weight-bold">Quiz beendet!</div>
+        <div>Du hast XXX Fragen von XXX richtig beatwortet</div>
+        <div><img class="trophy" src="./img/trophy.png"></div>
+      </div>
+
+      <div class="card-body" id="questionBody">
         <h5 class="card-title" id="questiontext">Frage</h5>
 
         <div class="card quiz-answer-card mb-2" onclick="answer('answer_1')">
