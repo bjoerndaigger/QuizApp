@@ -18,28 +18,37 @@
 </head>
 
 <body onload="init()">
-  <div class="container mt-5">
 
-    <!-- Navbar -->
-    <div class="w-25 navbar-container">
-      <nav class="navbar navbar-dark d-flex justify-content-center">
-        <a class="navbar-brand" href="./index.html">
-          <img id="logo" src="./img/logo.png" alt="QuizApp Logo">
-        </a>
-      </nav>
+  <nav class="navbar bg-body-tertiary">
+    <div class="container-fluid">
+      <span class="navbar-brand mb-0 h1">QuizApp</span>
+    </div>
+  </nav>
+  <div class="container mt-4">
+
+    <!-- Container left logo -->
+    <div class="w-25 logo-container pt-4">
+      <div class="d-flex justify-content-center">
+        <a href="./index.html"><img id="logo" src="./img/logo.png" alt="QuizApp Logo"></a>
+      </div>
     </div>
 
-
+    <!-- Container right questions and answers -->
     <div class="w-75">
       <div class="card card h-100">
 
         <!-- Endscreen -->
         <div class="card-body justify-endscreen" id="endScreen" style="display:none">
-          <img src="./img/brain-result.png">
-          <h5 class="text-uppercase">Quiz beendet!</h5>
-          <p>Du hast <strong id="amount-of-right-questions">XXX</strong> Fragen von <strong id="amount-of-questions">XXX</strong> richtig beatwortet</p>
+          <img class="m-2" src="./img/brain-result.png">
+          <h5 class="text-uppercase m-2">Quiz beendet!</h5>
+          <strong class="m-2">
+            <span class="text-uppercase text-warning">Dein Ergebnis:</span>
+            <span id="amount-of-right-questions">XXX</span> /
+            <span id="amount-of-questions">XXX</span>
+          </strong>
+          <button type="button" class="btn btn-primary m-4">Ergebnis teilen</button>
         </div>
-        
+
         <!-- Questions -->
         <div class="card-body justify-questions" id="questionBody">
           <h5 class="card-title" id="questiontext">Frage</h5>
