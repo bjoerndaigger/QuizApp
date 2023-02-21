@@ -18,27 +18,30 @@
 </head>
 
 <body onload="init()">
-  <div class="container">
-    <div class="container-left">
-      <nav class="d-flex justify-content-center">
-          <a href="./index.html">
-            <img src="./img/logo.png" alt="QuizApp Logo">
-          </a>
+  <div class="container mt-5">
+
+    <!-- Navbar -->
+    <div class="w-25 navbar-container">
+      <nav class="navbar navbar-dark d-flex justify-content-center">
+        <a class="navbar-brand" href="./index.html">
+          <img id="logo" src="./img/logo.png" alt="QuizApp Logo">
+        </a>
       </nav>
     </div>
 
-    <div class="container-right">
+
+    <div class="w-75">
       <div class="card card h-100">
 
-
-        <div class="card-body end-screen" id="endScreen" style="display: none">
-          <div><img src="./img/brain-result.png"> </div>
-          <div class="text-uppercase font-weight-bold">Quiz beendet!</div>
-          <div>Du hast XXX Fragen von XXX richtig beatwortet</div>
-          <div><img class="trophy" src="./img/trophy.png"></div>
+        <!-- Endscreen -->
+        <div class="card-body justify-endscreen" id="endScreen" style="display:none">
+          <img src="./img/brain-result.png">
+          <h5 class="text-uppercase">Quiz beendet!</h5>
+          <strong>Du hast XXX Fragen von XXX richtig beatwortet</strong>
         </div>
-
-        <div class="card-body" id="questionBody">
+        
+        <!-- Questions -->
+        <div class="card-body justify-questions" id="questionBody">
           <h5 class="card-title" id="questiontext">Frage</h5>
 
           <div class="card quiz-answer-card mb-2" onclick="answer('answer_1')">
