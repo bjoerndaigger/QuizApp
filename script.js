@@ -57,7 +57,7 @@ let questions = [
     }
 ];
 
-
+let rightQuestions = 0;
 let currentQuestion = 0;
 
 
@@ -71,6 +71,8 @@ function showQuestion() {
     if (currentQuestion >= questions.length) { // wenn currentQuestion gleich oder größer questions.length ist (hier 7) Ausführung stoppen
         document.getElementById('endScreen').style = ''; // leert das Inline-CSS, so dass display: none nicht mehr aktiv ist
         document.getElementById('questionBody').style = 'display: none'; //entfernt den Container mit den Fragen
+        document.getElementById('amount-of-questions').innerHTML = questions.length; // Anzahl der Fragen im Endscreen-Element
+        document.getElementById('amount-of-right-questions').innerHTML = rightQuestions; // Anzahl der richtig beantworten Fragen aus der Variablen rightQuestions
     } else {
         let question = questions[currentQuestion]; // zieht Wert aus JSON und startet an der Stelle 0
         document.getElementById('question-number').innerHTML = currentQuestion + 1; // Anzeige der aktuellen Indexstelle des Array
@@ -82,6 +84,7 @@ function showQuestion() {
     }
 }
 
+
 function answer(selection) { // onclick auf answer() und Übergabe des Parameters, welche Card geclickt wurde
     let question = questions[currentQuestion]; //ziehe mir den Wert von des JSON questions an der Stelle currentQuestion (globale Variable)
     let selectedQuestionNumber = selection.slice(-1); // ich greife auf den Parameter selection zu und ziehe mir den letzten Wert (hier eine Zahl) heraus
@@ -89,12 +92,14 @@ function answer(selection) { // onclick auf answer() und Übergabe des Parameter
 
     if (selectedQuestionNumber == question['right_answer']) { // ist slice(-1) Wert gleich questions an der Stelle currentQuestion aus dem Objekt?
         document.getElementById(selection).parentNode.classList.add('bg-success'); // fügt Klasse zum übergeordneten Div-Container zu, um Farbe zu ändern
+        rightQuestions++; // erhöht Variable rightQuestions um 1
     } else { // wenn nicht, dann falsche Antwort
         document.getElementById(selection).parentNode.classList.add('bg-danger'); // fügt Klasse zum übergeordneten Div-Container zu, um Farbe zu ändern
         document.getElementById(idOfRightAnswer).parentNode.classList.add('bg-success'); // bei falscher Antwort wird die richtige Antwort zusätzlich angezeigt
     }
     document.getElementById('next-button').disabled = false; // aktivieren des im HTML mit disabled deaktivierten Buttons
 }
+
 
 function nextQuestion() {
     currentQuestion++; // globale Variable erhöht sich z.B. von 0 auf 1
@@ -103,6 +108,7 @@ function nextQuestion() {
     resetAnswerButtons();
     showQuestion();
 }
+
 
 function resetAnswerButtons() {
     document.getElementById('answer_1').parentNode.classList.remove('bg-danger'); // zurücksetzen der hinzugefügten CSS-Klassen um Cardfarbe zu ändern
