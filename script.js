@@ -60,6 +60,7 @@ let questions = [
 let rightQuestions = 0;
 let currentQuestion = 0;
 
+
 let AUDIO_SUCCESS = new Audio('audio/success.mp3');
 let AUDIO_FAIL = new Audio('audio/fail.mp3');
 
@@ -71,25 +72,42 @@ function init() {
 
 
 function showQuestion() {
-    if (currentQuestion >= questions.length) { // wenn currentQuestion gleich oder größer questions.length ist (hier 7) Ausführung stoppen
-        document.getElementById('endScreen').style = ''; // leert das Inline-CSS, so dass display: none nicht mehr aktiv ist
-        document.getElementById('questionBody').style = 'display: none'; //entfernt den Container mit den Fragen
-        document.getElementById('amount-of-questions').innerHTML = questions.length; // Anzahl der Fragen im Endscreen-Element
-        document.getElementById('amount-of-right-questions').innerHTML = rightQuestions; // Anzahl der richtig beantworten Fragen aus der Variablen rightQuestions
-    } else { //Show Question
-        let percent = Math.round((currentQuestion + 1) / questions.length * 100); // Prozentberechnung des Progress Bar gerundet auf Ganzzahl
-
-        document.getElementById('progress-bar').innerHTML = `${percent} %`; // zugriff auf Progress Bar und verändern des Prozentzahl
-        document.getElementById('progress-bar').style = `width: ${percent}%`; // Änderung der Größe des Balkens von Progress Bar
-
-        let question = questions[currentQuestion]; // zieht Wert aus JSON und startet an der Stelle 0
-        document.getElementById('question-number').innerHTML = currentQuestion + 1; // Anzeige der aktuellen Indexstelle des Array
-        document.getElementById('questiontext').innerHTML = question['question'];
-        document.getElementById('answer_1').innerHTML = question['answer_1'];
-        document.getElementById('answer_2').innerHTML = question['answer_2'];
-        document.getElementById('answer_3').innerHTML = question['answer_3'];
-        document.getElementById('answer_4').innerHTML = question['answer_4'];
+    if (gameIsOver()) { 
+        showEndscreen(); // Aufruf der Funktion showEndscreen()
+    } else {
+        updateToNextQuestion();
     }
+}
+
+
+function gameIsOver() { // gibt immer true oder false zurück
+    return currentQuestion >= questions.length; // Show Endscreen wenn currentQuestion gleich oder größer questions.length (hier 7) ist
+}
+
+
+function showEndscreen() {
+    document.getElementById('endScreen').style = ''; // leert das Inline-CSS, so dass display: none nicht mehr aktiv ist
+    document.getElementById('questionBody').style = 'display: none'; //entfernt den Container mit den Fragen
+    document.getElementById('amount-of-questions').innerHTML = questions.length; // Anzahl der Fragen im Endscreen-Element
+    document.getElementById('amount-of-right-questions').innerHTML = rightQuestions; // Anzahl der richtig beantworten Fragen aus der Variablen rightQuestions
+}
+
+
+function updateProgressBar() {
+    let percent = Math.round((currentQuestion + 1) / questions.length * 100); // Prozentberechnung des Progress Bar gerundet auf Ganzzahl
+    document.getElementById('progress-bar').innerHTML = `${percent} %`; // zugriff auf Progress Bar und verändern des Prozentzahl
+    document.getElementById('progress-bar').style = `width: ${percent}%`; // Änderung der Größe des Balkens von Progress Bar
+}
+
+
+function updateToNextQuestion() {
+    let question = questions[currentQuestion]; // zieht Wert aus JSON und startet an der Stelle 0
+    document.getElementById('question-number').innerHTML = currentQuestion + 1; // Anzeige der aktuellen Indexstelle des Array
+    document.getElementById('questiontext').innerHTML = question['question'];
+    document.getElementById('answer_1').innerHTML = question['answer_1'];
+    document.getElementById('answer_2').innerHTML = question['answer_2'];
+    document.getElementById('answer_3').innerHTML = question['answer_3'];
+    document.getElementById('answer_4').innerHTML = question['answer_4'];
 }
 
 
@@ -98,7 +116,7 @@ function answer(selection) { // onclick auf answer() und Übergabe des Parameter
     let selectedQuestionNumber = selection.slice(-1); // ich greife auf den Parameter selection zu und ziehe mir den letzten Wert (hier eine Zahl) heraus
     let idOfRightAnswer = `answer_${question['right_answer']}`; // Variable, die die richtige Antwort an else weitergibt 
 
-    if (selectedQuestionNumber == question['right_answer']) { // ist slice(-1) Wert gleich questions an der Stelle currentQuestion aus dem Objekt?
+    if (rightAnswerSelected(selectedQuestionNumber)) { // ist slice(-1) Wert gleich questions an der Stelle currentQuestion aus dem Objekt?
         document.getElementById(selection).parentNode.classList.add('bg-success'); // fügt Klasse zum übergeordneten Div-Container zu, um Farbe zu ändern
         AUDIO_SUCCESS.play(); // spielt Ton ab
         rightQuestions++; // erhöht Variable rightQuestions um 1
@@ -108,13 +126,19 @@ function answer(selection) { // onclick auf answer() und Übergabe des Parameter
         AUDIO_FAIL.play(); // spielt Ton ab
     }
     document.getElementById('next-button').disabled = false; // aktivieren des im HTML mit disabled deaktivierten Buttons
+    updateProgressBar();
+}
+
+
+function rightAnswerSelected(selectedQuestionNumber) {
+    let question = questions[currentQuestion]; //ziehe mir den Wert von des JSON questions an der Stelle currentQuestion (globale Variable)
+    return selectedQuestionNumber == question['right_answer'];
 }
 
 
 function nextQuestion() {
     currentQuestion++; // globale Variable erhöht sich z.B. von 0 auf 1
     document.getElementById('next-button').disabled = true; // Weiterbutton-Funktion wird wieder deaktiviert (disabled)
-
     resetAnswerButtons();
     showQuestion();
 }
@@ -131,9 +155,12 @@ function resetAnswerButtons() {
     document.getElementById('answer_4').parentNode.classList.remove('bg-success');
 }
 
+
 function restartGame() {
     document.getElementById('endScreen').style = 'display: none'; // Endscreen mit display: none wieder entfernen
     document.getElementById('questionBody').style = ''; // display: none von questionBody entfernen, so dass Fragen wieder angezeigt werden
+    document.getElementById('progress-bar').innerHTML = ''; //zurücksetzen der Prozentzahl des Progress Bar
+    document.getElementById('progress-bar').style = ''; // zurücksetzen des Balkens des Progress Bar
     rightQuestions = 0; // zurücksetzen der Variablen auf 0
     currentQuestion = 0; // zurücksetzen der Variablen auf 0
     init(); // neustarten der Ausgangsfunktion
