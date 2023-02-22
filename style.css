@@ -16,6 +16,10 @@ body {
     border-radius: 0 0.375rem 0.375rem 0 !important;
 }
 
+.progress-bar {
+    border-radius: 0 0.375rem 0.375rem 0 !important;
+}
+
 .justify-questions {
     display: flex;
     flex-direction: column;

@@ -73,7 +73,12 @@ function showQuestion() {
         document.getElementById('questionBody').style = 'display: none'; //entfernt den Container mit den Fragen
         document.getElementById('amount-of-questions').innerHTML = questions.length; // Anzahl der Fragen im Endscreen-Element
         document.getElementById('amount-of-right-questions').innerHTML = rightQuestions; // Anzahl der richtig beantworten Fragen aus der Variablen rightQuestions
-    } else {
+    } else { //Show Question
+        let percent = Math.round((currentQuestion + 1) / questions.length * 100); // Prozentberechnung des Progress Bar gerundet auf Ganzzahl
+
+        document.getElementById('progress-bar').innerHTML = `${percent} %`; // zugriff auf Progress Bar und verändern des Prozentzahl
+        document.getElementById('progress-bar').style = `width: ${percent}%`; // Änderung der Größe des Balkens von Progress Bar
+
         let question = questions[currentQuestion]; // zieht Wert aus JSON und startet an der Stelle 0
         document.getElementById('question-number').innerHTML = currentQuestion + 1; // Anzeige der aktuellen Indexstelle des Array
         document.getElementById('questiontext').innerHTML = question['question'];
@@ -119,4 +124,12 @@ function resetAnswerButtons() {
     document.getElementById('answer_3').parentNode.classList.remove('bg-success');
     document.getElementById('answer_4').parentNode.classList.remove('bg-danger');
     document.getElementById('answer_4').parentNode.classList.remove('bg-success');
+}
+
+function restartGame() {
+    document.getElementById('endScreen').style = 'display: none'; // Endscreen mit display: none wieder entfernen
+    document.getElementById('questionBody').style = ''; // display: none von questionBody entfernen, so dass Fragen wieder angezeigt werden
+    rightQuestions = 0; // zurücksetzen der Variablen auf 0
+    currentQuestion = 0; // zurücksetzen der Variablen auf 0
+    init(); // neustarten der Ausgangsfunktion
 }
