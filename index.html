@@ -27,15 +27,15 @@
   <div class="container mt-4">
 
     <!-- Container left logo -->
-    <div class="w-25 logo-container pt-4">
+    <div class="container-left pt-4">
       <div class="d-flex justify-content-center">
         <a href="./index.html"><img id="logo" src="./img/logo.png" alt="QuizApp Logo"></a>
       </div>
     </div>
 
     <!-- Container right questions and answers -->
-    <div class="w-75">
-      <div class="card card h-100">
+    <div class="container-right">
+      <div class="card outer-card h-100">
 
         <!-- Progress Bar -->
         <div class="progress">
@@ -43,10 +43,10 @@
             aria-valuemin="0" aria-valuemax="100">0%</div>
         </div>
 
-
         <!-- Endscreen -->
         <div class="card-body justify-endscreen" id="endScreen" style="display:none">
           <img class="m-2" src="./img/brain-result.png">
+          <img class="trophy-img" src="./img/trophy.png">
           <h5 class="text-uppercase m-2">Quiz beendet!</h5>
           <strong class="m-2">
             <span class="text-uppercase text-warning">Dein Ergebnis:</span>
