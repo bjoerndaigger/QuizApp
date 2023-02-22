@@ -60,6 +60,9 @@ let questions = [
 let rightQuestions = 0;
 let currentQuestion = 0;
 
+let AUDIO_SUCCESS = new Audio('audio/success.mp3');
+let AUDIO_FAIL = new Audio('audio/fail.mp3');
+
 
 function init() {
     document.getElementById('all-questions').innerHTML = questions.length;
@@ -97,10 +100,12 @@ function answer(selection) { // onclick auf answer() und Übergabe des Parameter
 
     if (selectedQuestionNumber == question['right_answer']) { // ist slice(-1) Wert gleich questions an der Stelle currentQuestion aus dem Objekt?
         document.getElementById(selection).parentNode.classList.add('bg-success'); // fügt Klasse zum übergeordneten Div-Container zu, um Farbe zu ändern
+        AUDIO_SUCCESS.play(); // spielt Ton ab
         rightQuestions++; // erhöht Variable rightQuestions um 1
     } else { // wenn nicht, dann falsche Antwort
         document.getElementById(selection).parentNode.classList.add('bg-danger'); // fügt Klasse zum übergeordneten Div-Container zu, um Farbe zu ändern
         document.getElementById(idOfRightAnswer).parentNode.classList.add('bg-success'); // bei falscher Antwort wird die richtige Antwort zusätzlich angezeigt
+        AUDIO_FAIL.play(); // spielt Ton ab
     }
     document.getElementById('next-button').disabled = false; // aktivieren des im HTML mit disabled deaktivierten Buttons
 }

@@ -7,17 +7,9 @@ body {
     height: 600px;
 }
 
-.logo-container {
+.container-left {
     background-color: #27355C;
-    border-radius: 0.375rem 0 0 0.375rem;
-}
-
-.card {
-    border-radius: 0 0.375rem 0.375rem 0 !important;
-}
-
-.progress-bar {
-    border-radius: 0 0.375rem 0.375rem 0 !important;
+    border-radius: 0.375rem;
 }
 
 .justify-questions {
@@ -46,6 +38,13 @@ body {
     background-color: rgba(0, 0, 0, 0.05);
 }
 
-.bg-success,.bg-danger {
+.bg-success,
+.bg-danger {
     color: white;
+}
+
+@media (max-width: 800px) {
+    .container-left {
+        display: none;
+    }
 }
