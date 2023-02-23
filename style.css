@@ -61,6 +61,10 @@ body {
     z-index: 1;
 }
 
+.disabled {
+    pointer-events: none;
+}
+
 @media (max-width: 800px) {
     .container {
         height: 500px;

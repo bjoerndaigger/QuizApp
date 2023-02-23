@@ -59,8 +59,6 @@ let questions = [
 
 let rightQuestions = 0;
 let currentQuestion = 0;
-
-
 let AUDIO_SUCCESS = new Audio('audio/success.mp3');
 let AUDIO_FAIL = new Audio('audio/fail.mp3');
 
@@ -127,6 +125,7 @@ function answer(selection) { // onclick auf answer() und Übergabe des Parameter
     }
     document.getElementById('next-button').disabled = false; // aktivieren des im HTML mit disabled deaktivierten Buttons
     updateProgressBar();
+    disableOnClickQuestions();
 }
 
 
@@ -136,11 +135,28 @@ function rightAnswerSelected(selectedQuestionNumber) {
 }
 
 
+function disableOnClickQuestions() { // deaktivieren der onClick Funktion nach beantworten von Fragen
+    document.getElementById('answer_1').parentNode.classList.add('disabled');
+    document.getElementById('answer_2').parentNode.classList.add('disabled');
+    document.getElementById('answer_3').parentNode.classList.add('disabled');
+    document.getElementById('answer_4').parentNode.classList.add('disabled');
+}
+
+
 function nextQuestion() {
     currentQuestion++; // globale Variable erhöht sich z.B. von 0 auf 1
     document.getElementById('next-button').disabled = true; // Weiterbutton-Funktion wird wieder deaktiviert (disabled)
     resetAnswerButtons();
     showQuestion();
+    enableOnClickQuestions();
+}
+
+
+function enableOnClickQuestions() { // aktivieren der onClick Funktion nach Aufruf der nächsten Frage
+    document.getElementById('answer_1').parentNode.classList.remove('disabled');
+    document.getElementById('answer_2').parentNode.classList.remove('disabled');
+    document.getElementById('answer_3').parentNode.classList.remove('disabled');
+    document.getElementById('answer_4').parentNode.classList.remove('disabled');
 }
 
 
