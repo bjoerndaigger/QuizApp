@@ -15,6 +15,12 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
     crossorigin="anonymous"></script>
+
+  <!-- Favicon -->
+  <link rel="apple-touch-icon" sizes="180x180" href="./img/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="./img/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="./img/favicon/favicon-16x16.png">
+  <link rel="manifest" href="./img/favicon/site.webmanifest">
 </head>
 
 <body onload="init()">
@@ -24,6 +30,7 @@
       <span class="navbar-brand mb-0 h1">QuizApp</span>
     </div>
   </nav>
+  <div id="trophy-img"></div>
   <div class="container mt-4">
 
     <!-- Container left logo -->
@@ -46,7 +53,6 @@
         <!-- Endscreen -->
         <div class="card-body justify-endscreen" id="endScreen" style="display:none">
           <img class="m-2" src="./img/brain-result.png">
-          <img class="trophy-img" src="./img/trophy.png">
           <h5 class="text-uppercase m-2">Quiz beendet!</h5>
           <strong class="m-2">
             <span class="text-uppercase text-warning">Dein Ergebnis:</span>

@@ -88,6 +88,7 @@ function showEndscreen() {
     document.getElementById('questionBody').style = 'display: none'; //entfernt den Container mit den Fragen
     document.getElementById('amount-of-questions').innerHTML = questions.length; // Anzahl der Fragen im Endscreen-Element
     document.getElementById('amount-of-right-questions').innerHTML = rightQuestions; // Anzahl der richtig beantworten Fragen aus der Variablen rightQuestions
+    document.getElementById('trophy-img').innerHTML = '<img class="trophy-img" src="./img/trophy.png">';
 }
 
 
@@ -177,6 +178,7 @@ function restartGame() {
     document.getElementById('questionBody').style = ''; // display: none von questionBody entfernen, so dass Fragen wieder angezeigt werden
     document.getElementById('progress-bar').innerHTML = ''; //zurücksetzen der Prozentzahl des Progress Bar
     document.getElementById('progress-bar').style = ''; // zurücksetzen des Balkens des Progress Bar
+    document.getElementById('trophy-img').innerHTML = ''; // löschen des Bildes Trophy
     rightQuestions = 0; // zurücksetzen der Variablen auf 0
     currentQuestion = 0; // zurücksetzen der Variablen auf 0
     init(); // neustarten der Ausgangsfunktion
