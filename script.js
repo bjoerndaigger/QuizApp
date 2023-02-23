@@ -64,6 +64,10 @@ let AUDIO_SUCCESS = new Audio('audio/success.mp3');
 let AUDIO_FAIL = new Audio('audio/fail.mp3');
 
 
+AUDIO_SUCCESS.volume = 0.1; // Audio Volume auf 10% runterregeln
+AUDIO_FAIL.volume = 0.1;
+
+
 function init() {
     document.getElementById('all-questions').innerHTML = questions.length;
     showQuestion();
