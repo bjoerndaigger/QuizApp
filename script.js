@@ -57,6 +57,7 @@ let questions = [
     }
 ];
 
+
 let rightQuestions = 0;
 let currentQuestion = 0;
 let AUDIO_SUCCESS = new Audio('audio/success.mp3');
@@ -70,7 +71,7 @@ function init() {
 
 
 function showQuestion() {
-    if (gameIsOver()) { 
+    if (gameIsOver()) {
         showEndscreen(); // Aufruf der Funktion showEndscreen()
     } else {
         updateToNextQuestion();
